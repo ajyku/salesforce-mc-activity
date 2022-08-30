@@ -18,7 +18,10 @@
           "emailAddress": "{{InteractionDefaults.Email}}"
         },
         {
-          "phoneNumber": "{{Contact.Default.PhoneNumber}}"
+          "phoneNumber": "{{Contact.Default.Phone}}"
+        },
+        {
+          "lastName": "{{Contact.Default.lastName}}"
         }
       ],
       "outArguments": [
@@ -70,6 +73,13 @@
           {
             "emailAddress": {
               "dataType": "Email",
+              "isNullable": false,
+              "direction": "in"
+            }
+          },
+          {
+            "lastName": {
+              "dataType": "Text",
               "isNullable": false,
               "direction": "in"
             }

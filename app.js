@@ -23,27 +23,27 @@ app.use('/', express.static(__dirname + '/www'));
 // app.use('/users', usersRouter);
 
 app.post('/execute', (req, res) => {
-  console.log('request data: ', res.body);
+  console.log('execute data: ', req.body);
   res.json({ foundSignupDate: '2016-03-10' });
 });
 
 app.post('/save', (req, res) => {
-  console.log('reqsaveuest data: ', res.body);
+  console.log('save data: ', req.body);
   res.json({ message: 'saved' });
 });
 
 app.post('/publish', (req, res) => {
-  console.log('publish data: ', res.body);
+  console.log('publish data: ', req.body);
   res.json({ message: 'published!!!' });
 });
 
 app.post('/validate', (req, res) => {
-  console.log('validate data: ', res.body);
+  console.log('validate data: ', req.body);
   res.json({ message: 'validated!!!' });
 });
 
 app.post('/stop', (req, res) => {
-  console.log('requstopest data: ', res.body);
+  console.log('stop data: ', req.body);
   res.json({ message: 'stoped!!!' });
 });
 

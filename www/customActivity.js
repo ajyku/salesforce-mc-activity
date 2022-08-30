@@ -24,6 +24,7 @@ define(['postmonger'], function (Postmonger) {
   connection.on('gotoStep', onGotoStep);
 
   function onRender() {
+    console.log('onRender...');
     // JB will respond the first time 'ready' is called with 'initActivity'
     connection.trigger('ready');
 
@@ -52,6 +53,7 @@ define(['postmonger'], function (Postmonger) {
   }
 
   function initialize(data) {
+    console.log('initialize data: ', data);
     if (data) {
       payload = data;
     }
@@ -91,16 +93,19 @@ define(['postmonger'], function (Postmonger) {
   }
 
   function onGetTokens(tokens) {
+    console.log('onGetTokens: ', tokens);
     // Response: tokens = { token: <legacy token>, fuel2token: <fuel api token> }
     // console.log(tokens);
   }
 
   function onGetEndpoints(endpoints) {
+    console.log('onGetEndpoints: ', endpoints);
     // Response: endpoints = { restHost: <url> } i.e. "rest.s1.qa1.exacttarget.com"
     // console.log(endpoints);
   }
 
   function onClickedNext() {
+    console.log('onClickedNext...');
     if (
       (currentStep.key === 'step3' && steps[3].active === false) ||
       currentStep.key === 'step4'
@@ -112,15 +117,18 @@ define(['postmonger'], function (Postmonger) {
   }
 
   function onClickedBack() {
+    console.log('onClickedBack...');
     connection.trigger('prevStep');
   }
 
   function onGotoStep(step) {
+    console.log('onGotoStep: ', step);
     showStep(step);
     connection.trigger('ready');
   }
 
   function showStep(step, stepIndex) {
+    console.log('showStep...', step, stepIndex);
     if (stepIndex && !step) {
       step = steps[stepIndex - 1];
     }
@@ -180,8 +188,11 @@ define(['postmonger'], function (Postmonger) {
   }
 
   function save() {
+    console.log('save...');
     var name = $('#select1').find('option:selected').html();
     var value = getMessage();
+    var phone = $('#phone').val();
+    var lastName = $('lastName').val();
 
     // 'payload' is initialized on 'initActivity' above.
     // Journey Builder sends an initial payload with defaults
@@ -189,7 +200,9 @@ define(['postmonger'], function (Postmonger) {
     // may be overridden as desired.
     payload.name = name;
 
-    payload['arguments'].execute.inArguments = [{ message: value }];
+    payload['arguments'].execute.inArguments = [
+      { message: value, phone: phone, lastName: lastName },
+    ];
 
     payload['metaData'].isConfigured = true;
 
@@ -197,6 +210,7 @@ define(['postmonger'], function (Postmonger) {
   }
 
   function getMessage() {
+    console.log('getMessage...');
     return $('#select1').find('option:selected').attr('value').trim();
   }
 });
